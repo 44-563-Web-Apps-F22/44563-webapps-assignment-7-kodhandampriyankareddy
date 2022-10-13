@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Kodhandam Reaction</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <style>
+    body {background-color:rgb(232, 240, 173)}
+  </style>
+</head>
+<body>
+
+  <h2>Kodhandam Reaction Timer</h2>
+
+  <div id="yourTime">Your time: </div>
+  <div id="count">Count: </div>
+
+  <button type="button" class="btn btn-primary" onclick="startTime()">Start Timer</button>
+
+  <button type="button" class="btn btn-secondary" onclick="recordReact()">React</button>
+    
+  <script> 
+  var countOut = document.getElementById("count")
+  var yourTimeOut = document.getElementById("yourTime")
+
+  let myTime = undefined
+  let buttonTime = undefined
+  let elapsedTime = undefined
+
+  function startTime()
+  {
+    var randTimer = Math.floor(Math.random()*9)+2 //random 2-10
+
+    myTime = undefined //reset timer for multiple uses
+    for(let i=0;i<=randTimer;i++)
+    {
+      setTimeout(() => {
+        countOut.innerHTML = "Count: " + i
+        //console.log("Count: " + i)
+      }, 
+        ((randTimer-i)*1000)
+      );
+      
+    }
+    setTimeout(function() {
+      if (myTime === undefined) {
+        yourTimeOut.innerHTML = "Too Slow"
+      } else {
+        buttonTime = Date.now()
+        elapsedTime = -(myTime - buttonTime)
+        yourTimeOut.innerHTML = "Time was " + elapsedTime + "ms"
+      }
+    }, randTimer*1000)
+
+
+  }
+
+  function recordReact()
+  {
+    myTime = Date.now()
+    console.log("Start time: " + myTime)
+
+  }
+  </script>
+</body>
+</html>
